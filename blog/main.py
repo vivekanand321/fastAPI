@@ -19,6 +19,8 @@ app.include_router(blogging.router)
 app.include_router(user_detail.router)
 app.include_router(authentication.router)
 
+
+#Below Code is when we are not using APIRouting
 # def get_db():
 #     db=SessionLocal()
 #     try:
