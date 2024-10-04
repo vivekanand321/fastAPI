@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
-'''
+
+"""
 FastAPI is a framework to simply design API's.
 decorators which are made for different different opertaions .basically they present the url which will hitted from frontend.
 we are using swaggerUI ,for operations to accessing it->localhost:8000/docs
@@ -22,39 +23,38 @@ like dynamic url we have accept the queryparameter.in function we use limit keyw
 if two queryparameter are given and from browser only one parameter is fired then it will shoe error and demand for another parameter,to bypass this problem we gave default values
 ex->def index(limit:int=10,published:bool=True):
 sometimes we use optional imported from typing.we use it when we can get any parameter or not get any parameter,also in that case we have to use default value.
-'''
-'''
+"""
+"""
 from browser we cannot send data thats when request body is needed.for that we need pydantic models.
 we inherit BaseModel of pydantic and make a schema ,schema can have optional field.scema will field :data_type.
 we can change the port on which our app is runnning .for that __name__=="__main__" will checked and uvicorn take parameter(app,host="127.0.0.1",port=9000)
 FastAPI dont use a SQL(relational databases)
 
-'''
+"""
 
-app=FastAPI()#instantiating
-@app.get('/')
-def index(limit:int=10,published:bool=True,sort=None):
-    if published :
-        return {'data':f"{limit} blogs from th db"}
+app = FastAPI()  # instantiating
+
+
+@app.get("/")
+def index(limit: int = 10, published: bool = True, sort=None):
+    if published:
+        return {"data": f"{limit} blogs from th db"}
     else:
-        return {'data':f'blogs are not published'}    
+        return {"data": f"blogs are not published"}
 
-@app.get('/blog/{id}')
-def about(id:int):
+
+@app.get("/blog/{id}")
+def about(id: int):
     return {"data": id}
 
 
-
-
-
-
 class Blog(BaseModel):
-    title:str
-    body:str
-    published:Optional[bool]
+    title: str
+    body: str
+    published: Optional[bool]
 
-@app.post('/blog')
-def create_blog(blog:Blog):
+
+@app.post("/blog")
+def create_blog(blog: Blog):
     # print(blog)
-    return {"data":f"In blog title is {blog.title}"}
-
+    return {"data": f"In blog title is {blog.title}"}

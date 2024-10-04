@@ -1,17 +1,17 @@
-from fastapi import FastAPI,Depends,status,Response,HTTPException
-import schemas 
+from fastapi import FastAPI, Depends, status, Response, HTTPException
+import schemas
 import models
-from database import engine,SessionLocal,get_db
+from database import engine, SessionLocal, get_db
 from sqlalchemy.orm import Session
 from typing import List
 from passlib.context import CryptContext
+
 # from . import database
 # from blog.routers import blogging
-from routers import blogging,user_detail,authentication
+from routers import blogging, user_detail, authentication
 
- 
 
-app=FastAPI()
+app = FastAPI()
 
 models.Base.metadata.create_all(engine)
 
@@ -37,7 +37,7 @@ app.include_router(authentication.router)
 
 # @app.get('/blog',response_model=List[schemas.ShowBlog],tags=["Blogs"])
 # def get_blog(dbs:Session=Depends(get_db)):
-#     blogs=dbs.query(models.Blog).all()#convert it to query 
+#     blogs=dbs.query(models.Blog).all()#convert it to query
 #     return blogs
 
 # @app.get('/blog/{ids}',status_code=status.HTTP_200_OK,response_model=schemas.ShowBlog,tags=["Blogs"])
@@ -57,7 +57,7 @@ app.include_router(authentication.router)
 #         db.commit()
 #         return "done"
 #     else:
-#         return "data with {id} does't exist"    
+#         return "data with {id} does't exist"
 
 
 # @app.put('/blog/{ids}',status_code=status.HTTP_202_ACCEPTED,tags=["Blogs"])
@@ -90,6 +90,3 @@ app.include_router(authentication.router)
 #     if not fetched_data:
 #         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"user not exist ->{ids}")
 #     return fetched_data
-
-
-

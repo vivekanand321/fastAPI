@@ -1,4 +1,5 @@
 __pychache__
 fastapi-env
 Pipfile
+Pipfile.lock
 notes.py
